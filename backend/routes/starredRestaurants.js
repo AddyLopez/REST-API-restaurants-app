@@ -48,24 +48,45 @@ router.get("/", (req, res) => {
 /**
  * Feature 7: Getting a specific starred restaurant.
  */
+router.get("/:id", (req, res) => {
+  const { id } = req.params; // unpack id property from req.params using destructuring
 
+  // Join the two data sets (with restaurantId as the foreign key and id as the primary key)
+  const joinedStarredRestaurants = STARRED_RESTAURANTS.map(
+    (starredRestaurant) => {
+      const restaurant = ALL_RESTAURANTS.find((restaurant) => {
+        return restaurant.id === starredRestaurant.restaurantId;
+      });
 
+      return {
+        id: restaurant.id,
+        comment: starredRestaurant.comment,
+        name: restaurant.name,
+      };
+    }
+  );
+
+  const starredRestaurantFound = joinedStarredRestaurants.find((restaurant) => {
+    return restaurant.id === id;
+  });
+
+  if (!starredRestaurantFound) {
+    return res.sendStatus(404);
+  }
+
+  return res.json(starredRestaurantFound);
+});
 
 /**
  * Feature 8: Adding to your list of starred restaurants.
  */
 
-
-
 /**
  * Feature 9: Deleting from your list of starred restaurants.
  */
 
-
 /**
  * Feature 10: Updating your comment of a starred restaurant.
  */
-
-
 
 module.exports = router;

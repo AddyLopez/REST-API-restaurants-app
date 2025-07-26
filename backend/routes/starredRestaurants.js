@@ -130,5 +130,8 @@ router.delete("/:id", (req, res) => {
 /**
  * Feature 10: Updating your comment of a starred restaurant.
  */
+router.put("/:id", (res, req) => {
+  const { id } = req.params;
+});
 
 module.exports = router;

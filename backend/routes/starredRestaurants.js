@@ -120,6 +120,9 @@ router.delete("/:id", (req, res) => {
     res.status(404);
     return;
   }
+
+  // Update starred restaurants list by reassigning it to the new one
+  STARRED_RESTAURANTS = newStarredRestaurantList;
 });
 /**
  * Feature 10: Updating your comment of a starred restaurant.

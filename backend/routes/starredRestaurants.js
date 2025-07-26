@@ -137,6 +137,12 @@ router.put("/:id", (res, req) => {
   const starredRestaurant = STARRED_RESTAURANTS.find((restaurant) => {
     return restaurant.id === id;
   });
+
+  // Error handling if restaurant is not found
+  if (!starredRestaurant) {
+    res.sendStatus(404);
+    return;
+  }
 });
 
 module.exports = router;

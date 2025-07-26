@@ -132,6 +132,11 @@ router.delete("/:id", (req, res) => {
  */
 router.put("/:id", (res, req) => {
   const { id } = req.params;
+
+  // Find the relevant starred restaurant from the list
+  const starredRestaurant = STARRED_RESTAURANTS.find((restaurant) => {
+    return restaurant.id === id;
+  });
 });
 
 module.exports = router;

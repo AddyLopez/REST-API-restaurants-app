@@ -132,6 +132,7 @@ router.delete("/:id", (req, res) => {
  */
 router.put("/:id", (res, req) => {
   const { id } = req.params;
+  const { newComment } = req.body;
 
   // Find the relevant starred restaurant from the list
   const starredRestaurant = STARRED_RESTAURANTS.find((restaurant) => {
@@ -143,6 +144,9 @@ router.put("/:id", (res, req) => {
     res.sendStatus(404);
     return;
   }
+
+  // Otherwise, update restaurant's comment with comment from request body
+  starredRestaurant.comment = newComment;
 });
 
 module.exports = router;

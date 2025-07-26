@@ -68,25 +68,34 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   const { body } = req; // destructure the body from the request
-  const { name } = body; // destructure name from the body of the request
+  const { id } = body; // destructure id from the body of the request
 
   const restaurantToStar = ALL_RESTAURANTS.find((restaurant) => {
-    return restaurant.name === name;
+    return restaurant.id === id;
   });
 
   if (!restaurantToStar) {
     return res.sendStatus(404);
   }
 
+  // Create unique id for new starred restaurant
   const newId = uuidv4();
+
+  // Create a record for new starred restaurant
   const newStarredRestaurant = {
     id: newId,
-    name: name,
+    restaurantId: restaurant.id,
+    comment: null,
   };
 
+  // Add new record to starred restaurants array
   STARRED_RESTAURANTS.push(newStarredRestaurant);
-  res.sendStatus(201);
-  return res.json(STARRED_RESTAURANTS);
+
+  res.sendStatus(201).send({
+    id: newStarredRestaurant.id,
+    comment: newStarredRestaurant.comment,
+    name: restaurant.name,
+  });
 });
 
 /**

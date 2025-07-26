@@ -147,6 +147,9 @@ router.put("/:id", (res, req) => {
 
   // Otherwise, update restaurant's comment with comment from request body
   starredRestaurant.comment = newComment;
+
+  // Send success status code
+  return res.sendStatus(200);
 });
 
 module.exports = router;

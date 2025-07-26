@@ -107,7 +107,7 @@ router.post("/", (req, res) => {
 /**
  * Feature 9: Deleting from your list of starred restaurants.
  */
-
+router.delete("/:id", (req, res) => {});
 /**
  * Feature 10: Updating your comment of a starred restaurant.
  */

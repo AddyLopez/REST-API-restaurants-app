@@ -51,22 +51,7 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   const { id } = req.params; // unpack id property from req.params using destructuring
 
-  // Join the two data sets (with restaurantId as the foreign key and id as the primary key)
-  const joinedStarredRestaurants = STARRED_RESTAURANTS.map(
-    (starredRestaurant) => {
-      const restaurant = ALL_RESTAURANTS.find((restaurant) => {
-        return restaurant.id === starredRestaurant.restaurantId;
-      });
-
-      return {
-        id: restaurant.id,
-        comment: starredRestaurant.comment,
-        name: restaurant.name,
-      };
-    }
-  );
-
-  const starredRestaurantFound = joinedStarredRestaurants.find((restaurant) => {
+  const starredRestaurantFound = STARRED_RESTAURANTS.find((restaurant) => {
     return restaurant.id === id;
   });
 

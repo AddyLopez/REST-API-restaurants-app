@@ -75,7 +75,8 @@ router.post("/", (req, res) => {
   });
 
   if (!restaurantToStar) {
-    return res.sendStatus(404);
+    res.sendStatus(404);
+    return;
   }
 
   // Create unique id for new starred restaurant
@@ -84,17 +85,17 @@ router.post("/", (req, res) => {
   // Create a record for new starred restaurant
   const newStarredRestaurant = {
     id: newId,
-    restaurantId: restaurant.id,
+    restaurantId: restaurantToStar.id,
     comment: null,
   };
 
   // Add new record to starred restaurants array
   STARRED_RESTAURANTS.push(newStarredRestaurant);
 
-  res.sendStatus(201).send({
+  res.status(200).send({
     id: newStarredRestaurant.id,
     comment: newStarredRestaurant.comment,
-    name: restaurant.name,
+    name: restaurantToStar.name,
   });
 });
 
@@ -105,8 +106,8 @@ router.delete("/:id", (req, res) => {
   const { id } = req.params;
 
   // Remove restaurant from list of starred restaurants
-  const newStarredRestaurantList = STARRED_RESTAURANTS.filter((restaurtant) => {
-    return STARRED_RESTAURANTS.id !== id;
+  const newStarredRestaurantList = STARRED_RESTAURANTS.filter((restaurant) => {
+    return restaurant.id !== id;
   });
 
   // Error handling if a user tries to delete a restaurant that's not found.

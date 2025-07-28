@@ -112,15 +112,15 @@ router.delete("/:id", (req, res) => {
 
   // Error handling if a user tries to delete a restaurant that's not found.
   if (STARRED_RESTAURANTS.length === newStarredRestaurantList.length) {
-    res.status(404);
+    res.sendStatus(404);
     return;
   }
 
   // Update starred restaurants list by reassigning it to the new one
   STARRED_RESTAURANTS = newStarredRestaurantList;
 
-  // Return success status
-  return res.sendStatus(202);
+  // Send success status
+  res.sendStatus(200);
 });
 /**
  * Feature 10: Updating your comment of a starred restaurant.

@@ -144,7 +144,7 @@ router.put("/:id", (res, req) => {
   starredRestaurant.comment = newComment;
 
   // Send success status code
-  return res.sendStatus(200);
+  res.sendStatus(200);
 });
 
 module.exports = router;
